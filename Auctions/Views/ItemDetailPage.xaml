@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auctions.Views.ItemDetailPage"
+             Title="Item details">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15" >
+                <Label Text="Text:" FontSize="Medium" />
+                <Label Text="{Binding Name}" FontSize="Small"/>
+                <Label Text="Description:" FontSize="Medium" />
+                <Label Text="{Binding Description}" FontSize="Small"/>
+                <Label Text="Price:" FontSize="Medium" />
+                <Label Text="{Binding Price}" FontSize="Small"/>
+                <Label Text="Owner:" FontSize="Medium" />
+                <Label Text="{Binding Owner}" FontSize="Small"/>
+                <Label Text="Category:" FontSize="Medium" />
+                <Label Text="{Binding Category}" FontSize="Small"/>
+                <Label x:Name="lBid" Text="Last bid:" FontSize="Medium" />
+                <Label x:Name="lBidA" Text="{Binding Bid}" FontSize="Small" />
+                <Button Text="Add a bid" Clicked="OnBid"/>
+                <Entry x:Name="eBName" Placeholder="Name" Text="{Binding BidN, Mode=OneWayToSource}" IsVisible="False"/>
+                <Entry x:Name="eBAmount" Placeholder="Amount" Text="{Binding Bid, Mode=OneWayToSource}" IsVisible="False"/>
+                <Button x:Name="bBidAdd" Text="Add" Clicked="OnBidAdd" IsVisible="False"/>
+                <Button Text="Delete" Clicked="OnDelete"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>
