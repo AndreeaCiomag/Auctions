@@ -7,6 +7,17 @@
              x:Class="Auctions.Views.LoginPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        
+        <StackLayout Spacing="3" Padding="15">
+
+            <Label Text="User Name" FontSize="Medium"/>
+            <Entry x:Name="UserN" FontSize="Medium"/>
+
+           <Label Text="Password" FontSize="Medium"/>
+           <Entry x:Name="UserP" FontSize="Medium" IsPassword="True"/>
+           <StackLayout Orientation="Horizontal">
+               <Button Text="LogIn" Clicked="OnLogIn" HorizontalOptions="FillAndExpand"/>
+               <Button Text="Create a new account" HorizontalOptions="FillAndExpand" Clicked="OnNew"/>
+           </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

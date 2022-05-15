@@ -5,12 +5,14 @@
              Title="Items" 
              xmlns:model="clr-namespace:Auctions.Models"  
              x:Name="BrowseItemsPage">
-
+   
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="OnAddItem" />
+        <ToolbarItem Text="About" Clicked="OnAbout" />
     </ContentPage.ToolbarItems>
     <StackLayout>
         <SearchBar x:Name="SearchB" Placeholder="Search items..." TextChanged="OnChange"/>
+        
         <Picker x:Name="CatgPick" Title="Select category" SelectedIndexChanged="OnCatgSelect">
             <Picker.Items>
                 <x:String>All</x:String>
@@ -18,8 +20,9 @@
                 <x:String>Car</x:String>
                 <x:String>Art</x:String>
             </Picker.Items>
-        </Picker> 
-        <ListView x:Name="itemsListView" ItemSelected="OnItemSelected">
+        </Picker>
+        
+        <ListView x:Name="itemsListView" ItemTapped="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" Detail="{Binding Description}"/>

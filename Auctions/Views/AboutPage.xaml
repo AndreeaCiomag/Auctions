@@ -3,6 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Auctions.Views.AboutPage"
              Title="About">
-   
-
+   <ContentPage.ToolbarItems>
+       <ToolbarItem Text="Back" Clicked="OnBack"/>
+       <ToolbarItem Text="Edit" Clicked="OnEdit"/>
+   </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="fname_ent" FontSize="Medium" IsReadOnly="True"/>
+            <Entry x:Name="lname_ent" FontSize="Medium" IsReadOnly="True"/>
+            <Entry x:Name="uname_ent" FontSize="Medium" IsReadOnly="True"/>
+            <Button x:Name="save_btn" Text="Save" Clicked="OnSave" IsVisible="false"/>
+            <Button Text="Logout" Clicked="OnLogout"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
