@@ -11,16 +11,21 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.IO;
+using Plugin.Media.Abstractions;
+using Plugin.Media;
 
 namespace Auctions.Views
 {
     public partial class NewItemPage : ContentPage
     {
+
         public Item Item { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
         public string Owner { get; set; }
+        public string Image { get; set; }
         public string Category { get; set; }
         public DateTime DateFin { get; set; }
 
@@ -40,20 +45,33 @@ namespace Auctions.Views
             InitializeComponent();
             BindingContext = this;
         }
-        
+        public string img;
+
+        async void OnBrowse(object sender, EventArgs e)
+        {
+            var image = await MediaPicker.PickPhotoAsync();
+            if (image != null)
+            {
+                var newFile = Path.Combine("/Users/andreeaciomag/NewFolder", image.FileName);
+
+                using (var stream = await image.OpenReadAsync())
+                using (var newStream = File.OpenWrite(newFile))
+                    await stream.CopyToAsync(newStream);
+
+                img = image.FileName;
+            }
+        }
+
         //event handler pentru butonul de Save
         async void OnSave(object sender, EventArgs e)
         {
-            /*string response = await _client.GetStringAsync(Url2);
-            List<User> users = JsonConvert.DeserializeObject<List<User>>(response);
-            user = new ObservableCollection<User>(users);*/
-            
             Item = new Item
             {
                 Name = this.Name,
                 Description = this.Description,
                 Price = this.Price,
                 Owner = currentUser.UserName,
+                Image = img,
                 Category = this.Category,
                 Date = DateTime.UtcNow,
                 DateFin = this.DateFin
@@ -69,17 +87,5 @@ namespace Auctions.Views
         {
             await Navigation.PopModalAsync();
         }
-        /*
-        public string Image;
-        async void OnBrowse(object sender, EventArgs e)
-        {
-            var image = await MediaPicker.PickPhotoAsync();
-            if(image != null)
-            {
-                var str = await image.OpenReadAsync();
-                Image = image.FullPath;
-            }
-        }
-        */
     }
 }

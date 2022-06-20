@@ -10,9 +10,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="20" Padding="15" x:Name="details_stack">
-                <!--
-                <Image Source="{Binding Image}"/>
-                -->
+                
+                <Image x:Name="prod_img" />
+                
                 <Label Text="Name:" FontSize="Small" FontAttributes="Bold" />
                 <Label x:Name="name_lbl" FontSize="Small"/>
                 <Label Text="Description:" FontSize="Small" FontAttributes="Bold" />
@@ -27,7 +27,7 @@
                 <Label x:Name="lBid" Text="Last bid:" FontSize="Small" FontAttributes="Bold" />
                 <Label x:Name="lBid_lbl" FontSize="Small" />
 
-                <Button Text="Add a bid" Clicked="OnBid"/>
+                <Button x:Name="addB_btn" Text="Add a bid" Clicked="OnBid"/>
                 <Entry x:Name="eBAmount" Placeholder="Amount" Text="{Binding Bid, Mode=OneWayToSource}" IsVisible="False"/>
                 <Button x:Name="bBidAdd" Text="Add" Clicked="OnBidAdd" IsVisible="False"/>
                 

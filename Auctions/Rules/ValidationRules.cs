@@ -6,7 +6,7 @@ namespace Auctions.Rules
 {
     public class ValidationRules
     {
-        public ValidationRules()
+        /*public ValidationRules()
         {
             void PassLenValid(string pass) { }
             void PassMajValid(string pass) { }
@@ -39,6 +39,6 @@ namespace Auctions.Rules
             bool valid = true;
             Regex emailRegex = new Regex(@"^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}");
             if (!emailRegex.IsMatch(email)) valid = false;
-        }
+        }*/
     }
 }

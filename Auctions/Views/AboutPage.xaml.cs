@@ -15,8 +15,10 @@ namespace Auctions.Views
     public partial class AboutPage : ContentPage
     {
         public User currentUser { get; set; }
+
         private readonly HttpClient client = new HttpClient();
         private const string Url = "https://myapiauct.azurewebsites.net/api/users";
+
         private ObservableCollection<User> user;
 
         public AboutPage(int id)
@@ -29,12 +31,11 @@ namespace Auctions.Views
         }
         protected override async void OnAppearing()
         {
-            //await DisplayAlert("info", currentUser.Id.ToString(), "ok");
+            
             string response = await client.GetStringAsync(Url);
             List<User> users = JsonConvert.DeserializeObject<List<User>>(response);
             user = new ObservableCollection<User>(users);
 
-            //currentUserInfo.ItemsSource = user.Where(i => i.Id.Equals(currentUser.Id));
             foreach(User u in user)
             {
                 if(u.Id == currentUser.Id)
@@ -61,7 +62,7 @@ namespace Auctions.Views
         {
             await Navigation.PopModalAsync();
         }
-        async void OnEdit(object sender, EventArgs e)
+        void OnEdit(object sender, EventArgs e)
         {
             save_btn.IsVisible = true;
             fname_ent.IsReadOnly = false;
@@ -87,6 +88,14 @@ namespace Auctions.Views
             fname_ent.IsReadOnly = true;
             lname_ent.IsReadOnly = true;
             uname_ent.IsReadOnly = true;
+        }
+        async void OnDeleteAcc(object sender, EventArgs e)
+        {
+            var id = currentUser.Id;
+            int i = int.Parse(id.ToString());
+            var response = await client.DeleteAsync($"{Url}/{i}");
+            await Navigation.PopToRootAsync();
+            await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
     }
 }

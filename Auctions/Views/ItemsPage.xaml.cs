@@ -58,7 +58,7 @@ namespace Auctions.Views
         async void OnItemSelected(object sender, ItemTappedEventArgs e)
         {
             var selected = e.Item as Item;
-            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(selected.Id, selected.Name, selected.Description, selected.Price, selected.Owner, selected.Category, currentUser.Id)));
+            await Navigation.PushModalAsync(new NavigationPage(new ItemDetailPage(selected.Id, selected.Name, selected.Description, selected.Price, selected.Owner, selected.Image, selected.Category, selected.DateFin, currentUser.Id)));
             ((ListView)sender).SelectedItem = null;
         }
         

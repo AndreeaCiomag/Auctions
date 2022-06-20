@@ -26,19 +26,24 @@ namespace Auctions.Views
         private const string Url3 = "https://myapiauct.azurewebsites.net/api/bids";
         private ObservableCollection<Bid> bid1;
 
-        public ItemDetailPage(int id, string name, string description, int price, string owner, string category, int idc)
+        DateTime df;
+
+        public ItemDetailPage(int id, string name, string description, int price, string owner, string img, string category, DateTime date, int idc)
         {
             InitializeComponent();
             name_lbl.Text = name;
             desc_lbl.Text = description;
             price_lbl.Text = price.ToString();
+            prod_img.Source = "/NewFolder/"+img;
             owner_lbl.Text = owner;
             categ_lbl.Text = category;
             currentUser = new User
             {
                 Id = idc
             };
+            df = date;
             Application.Current.Properties["id"] = id;
+
         }
 
         protected override async void OnAppearing()
@@ -67,6 +72,14 @@ namespace Auctions.Views
                 else bidVal = int.Parse(price_lbl.Text);
             }
             lBid_lbl.Text = bidVal.ToString();
+            if (currentUser.UserName == owner_lbl.Text) delete_btn.IsVisible = true;
+
+            if (System.DateTime.UtcNow > df)
+            {
+                addB_btn.Text = "Auction closed";
+                addB_btn.IsEnabled = false;
+            }
+
             base.OnAppearing();
         }
         //event handler pentru butonul de Delete
@@ -112,17 +125,6 @@ namespace Auctions.Views
             {
                 var id = Application.Current.Properties["id"];
                 int i = int.Parse(id.ToString());
-                /*Item = new Item
-                {
-                    Id = i,
-                    Name = name_lbl.Text,
-                    Description = desc_lbl.Text,
-                    Price = int.Parse(price_lbl.Text),
-                    Owner = owner_lbl.Text,
-                    Category = categ_lbl.Text,
-                    Bid = bid,
-                    BidN = currentUser.UserName
-                };*/
                 Bid1 = new Bid
                 {
                     BidVal = bid,
